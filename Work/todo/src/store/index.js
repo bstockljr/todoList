@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate"
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import todos from '@/resources/todos.js' 
+import todosResouce from '@/resources/todos.js' 
 // import { createStore } from 'vuex'
 // import Cookies from 'js-cookie';
 // Vue.use(VueAxios, axios)
@@ -15,8 +15,9 @@ export default new Vuex.Store({
   state: {
 
     todos:[],
-
-  
+    loggedAdmin:{},
+    loggedIn: false,
+    
 },
 
 
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     allTodos:(state) => state.todos,
     todoCount: state => { return state.todos.length },
     Types:(state) => state.userTypes,
+
+    adminFromState:(state) => state.loggedAdmin,
+    logStatus:(state) => state.loggedIn,
     
   }, 
   
@@ -32,22 +36,30 @@ export default new Vuex.Store({
   //actions
   actions: {
 
-    getTodos({commit}){
-      commit("get_todos");
+    async getTodos({commit}){
+      let response = await todosResouce.getTodos();
+      let todos = response.data;
+      commit("get_todos", todos);
     },
 
+
+
+
+    setLoggedAdmin({commit}, data){
+      commit("set_loggedAdmin", data)
+    },
+
+    setLogStatus({commit}, status){
+      commit("set_logStatus", status)
+    },
     // getUsers({commit}){
     //   commit("get_users");
     // },
 
+
     // getAdmins({commit}){
     //   commit("get_admins");
     // }
-
-
-
-
-
     // addTodo({ commit }, todo){
     //   commit("add_todo", todo);
       
@@ -56,23 +68,23 @@ export default new Vuex.Store({
     // deleteTodo({ commit }, id){
     //   commit("delete_todo", id);
     // },
-     
-    
-    
-
-
-
-
+//let response = await todos.getTodos(); must be moved to actions!!!!
   },
   
   
   //mutations
   mutations: {
 
+    get_todos(state, todos) {
+      state.todos = todos;
+    },
 
-    async get_todos(state) {
-      let response = await todos.getTodos();
-      state.todos = response.data;
+    set_loggedAdmin(state, data){
+      state.loggedAdmin = data;
+    },
+
+    set_logStatus(state, status ){
+      state.loggedIn = status;
     }
 
 

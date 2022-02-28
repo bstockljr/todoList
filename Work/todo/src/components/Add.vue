@@ -1,8 +1,8 @@
 <template>
-  <div class="add"> 
-    <div class="addForm">
+  <div class="container"> 
+    <div class="col-12 addForm">
 
-      <span> New item:
+      <span>New item:
         <input
         v-model="todo.item" 
         class="inputAdd" 
@@ -139,6 +139,9 @@ export default {
 
 <style scoped>
 
+
+
+
 .addForm{
   font-size: 20px;
   font-weight: bold;
@@ -146,25 +149,21 @@ export default {
   justify-content: space-evenly;
   align-items:  center;
   background: #42a0ff74;
-  margin:25px 50px;
-  height: 40px;
+  height: 60px;
 }
 
 .btnadd{ 
- 
   color: rgb(255, 255, 255);
   background:#0073df ;
   height: 30px;
   width: 30px;
   border: none;
   border-radius: 3px;
-
 }
 
 .btnadd:hover{
   background: #02396d ;
   transition: 200ms;
-  
 }
 
 .inputAdd{

@@ -8,6 +8,11 @@ export default {
         return api.post('createAdmin',newAdmin)
     },
     login(newLog){
-        return api.post('/auth',newLog)
-    }
+        return api.post('login',newLog)
+    },
+    // logout(endLog){
+    //     return api.post('logout',endLog)
+    // }
+
+
 }

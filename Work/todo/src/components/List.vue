@@ -39,15 +39,11 @@
                   </el-option> 
               </el-select>  
           <span>
-                  <button @click="updateTodo(todo)" class="btnadd  ms-5 mx-1"> ok </button>
+              <button @click="updateTodo(todo)" class="btnadd  ms-5 mx-1"> Ok </button>
           </span> 
-       
-
-       
-
-        <span>
-            <button @click="deleteTodo(todo.id)" class="btnDel  ms-5 mx-1"> x </button>
-        </span>   
+          <span>
+              <button @click="deleteTodo(todo.id)" class="btnDel  ms-5 mx-1"> x </button>
+          </span>   
     </div>
   </div>
 </template>
@@ -163,7 +159,10 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin: 10px 60px;
-    background: #1b2733;
+    background: #1b27335f;
+    border-radius: 15px;
+    -webkit-box-shadow: -10px 0px 13px -7px #0000003f, 10px 0px 13px -7px #000000, 0px 0px 3px -28px rgba(0,0,0,0); 
+    box-shadow: -10px 0px 13px -7px #0000003f, 10px 0px 13px -7px #000000, 0px 0px 3px -28px rgba(0,0,0,0);
    
 
 }
@@ -191,29 +190,31 @@ export default {
   height: 30px;
   width: 30px;
   border: none;
-  border-radius: 3px;
-  background: #9d0404;
+  border-radius: 8px;
+  background: #9d04049c;
 }
 
 .btnDel:hover{
-  background: #700909 ;
-  transition: 200ms;
+  background: #70090954 ;
+  transition: 300ms;
 }
 
 .btnadd{ 
- 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: rgb(255, 255, 255);
-  background:#0073df ;
+  background:#0073df60 ;
   height: 30px;
   width: 30px;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
 
 }
 
 .btnadd:hover{
-  background: #02396d ;
-  transition: 200ms;
+  background: #02396d6b ;
+  transition: 300ms;
   
 }
 .isCompleted{
