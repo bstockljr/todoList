@@ -25,6 +25,13 @@ Route::post('/createAdmin', '\App\Http\Controllers\AdminController@create');
 Route::post('/login', '\App\Http\Controllers\AdminController@login');
 
 
+
+// section logout --------------------------------------------------------------------
+// Route::post('/logout', '\App\Http\Controllers\AdminController@logout');
+
+
+
+
 //------------------------------------------------------------------------------------
 
 //User fetch
@@ -33,8 +40,8 @@ Route::get('/users', '\App\Http\Controllers\UserController@index');
 
 
 //auth
-Route::middleware('auth:api')->get('/auth', function(Request $request) {
-    return $request->admin();});
+// Route::middleware('auth:api')->post('/auth', function(Request $request) {
+//     return $request->admin();});
 
 
 

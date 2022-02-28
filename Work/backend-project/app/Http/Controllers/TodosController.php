@@ -30,60 +30,81 @@ class TodosController extends Controller
         public function index()
         {
             $todos = Todos::with(['admins','users'])->get();
-            // $lastTodo->load('relation')
-
             foreach ( $todos as $todo){
-            $todo->user = null;
-                    if( count($todo->admins) > 0){
-
-                    $admins_ids = [];
-                        foreach ( $todo->admins as $admin){
-                            array_push($admins_ids, $admin->id);
-                        }
-
-                        $todo->user_type = "Admin";
-                        $todo->adminsIds = $admins_ids;
-
-
-
-                        //    $todo->user = $todo->admins[0];
-                        //    $todo->userId = $todo->admins[0]->id;
-                    //    $todo->username = $todo->admins[0]->name;
-                    // }else{
-                    //     $admin = Admin::find($todo->user);
-                    //     $todo->username = $admin->name;
-                    // }
-                    }
-                    if( count($todo->users) > 0){
-                    $users_ids = [];
-                        foreach ( $todo->users as $user){
-                            array_push($users_ids, $user->id);
-                        }
-                        
-                        $todo->user_type = "user";
-                        $todo->usersIds = $users_ids;
-
-                        // $todo->user = $todo->users[0];
-                        // $todo->userId = $todo->users[0]->id;
-                    }
-                    // $todo->username = $todo->users[0]->name;
-                
-
-
-                // foreach ( $todos as $todo){
-                //     if($todo->user_type === 'user'){
-                //         $user = User::find($todo->user);
-                //         $todo->username = $user->name;
-                //     }else{
-                //         $admin = Admin::find($todo->user);
-                //         $todo->username = $admin->name;
-                //     }
-                // }
-                
+                $todo->adminsIds = $todo->admins()->pluck('todoable_id');
+                if( count($todo->adminsIds) > 0){
+                    $todo->user_type = "Admin";
+                }
+                $todo->usersIds = $todo->users()->pluck('todoable_id');
+                if( count($todo->usersIds) > 0){
+                    $todo->user_type = "user";
+                }
             }
+
+
+
+
+
+
+
+
+
+
+
+            // foreach ( $todos as $todo){
+            // $todo->user = null;
+            //         if( count($todo->admins) > 0){
+
+            //         $admins_ids = [];
+            //             foreach ( $todo->admins as $admin){
+            //                 array_push($admins_ids, $admin->id);
+            //             }
+
+            //             $todo->user_type = "Admin";
+            //             $todo->adminsIds = $admins_ids;
+
+            //         //    $todo->user = $todo->admins[0];
+            //         //    $todo->userId = $todo->admins[0]->id;
+            //         //    $todo->username = $todo->admins[0]->name;
+            //         // }else{
+            //         //     $admin = Admin::find($todo->user);
+            //         //     $todo->username = $admin->name;
+            //         // }
+            //         }
+            //         if( count($todo->users) > 0){
+            //         $users_ids = [];
+            //             foreach ( $todo->users as $user){
+            //                 array_push($users_ids, $user->id);
+            //             }
+                        
+            //             $todo->user_type = "user";
+            //             $todo->usersIds = $users_ids;
+
+            //             // $todo->user = $todo->users[0];
+            //             // $todo->userId = $todo->users[0]->id;
+            //         }
+            //         // $todo->username = $todo->users[0]->name;
+                
+
+
+            //     // foreach ( $todos as $todo){
+            //     //     if($todo->user_type === 'user'){
+            //     //         $user = User::find($todo->user);
+            //     //         $todo->username = $user->name;
+            //     //     }else{
+            //     //         $admin = Admin::find($todo->user);
+            //     //         $todo->username = $admin->name;
+            //     //     }
+            //     // }
+                
+
+
+
+
+            // }
             return response()->json($todos, 201);   
         
-    }
+        }
         //ADD
         public function create(Request $request)
         {
